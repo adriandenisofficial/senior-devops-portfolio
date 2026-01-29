@@ -11,7 +11,6 @@
 This monorepo documents my journey building production-grade DevOps systems.
 
 - **[Project 1: FinOps Observability Pipeline](./project-1-finops)** - *Bridging the gap between Engineering, Finance, and Business metrics.*
-- **Project 2: Zero-Downtime Migration** - *(Coming Soon)* - *High-Availability PostgreSQL cluster with HAProxy.*
 
 ---
 
