@@ -38,15 +38,32 @@ I built a full-stack observability pipeline that correlates **System Health** (L
 > **[Link to Dashboard Screenshot](./docs/final-dashboard-evidence.png)**
 
 ### 💻 How to Run This Project
-```bash
-# 1. Clone the repo
-git clone [https://github.com/adriandenisofficial/senior-devops-portfolio.git](https://github.com/adriandenisofficial/senior-devops-portfolio.git)
 
-# 2. Navigate to Project 1
-cd senior-devops-portfolio/project-1-finops
+**Prerequisites:**
+* Docker & Docker Compose installed.
+* **AWS Credentials:** The Python script requires AWS access. Ensure you have `~/.aws/credentials` set up or are running on an EC2 instance with an IAM Role.
 
-# 3. Build and Start the Stack
-docker-compose up -d --build
+**Steps:**
+1.  **Clone the repo**
+    ```bash
+    git clone [https://github.com/adriandenisofficial/senior-devops-portfolio.git](https://github.com/adriandenisofficial/senior-devops-portfolio.git)
+    cd senior-devops-portfolio/project-1-finops
+    ```
+
+2.  **Set Permissions (Crucial)**
+    * *Linux/Mac only: Allow Docker to read the metrics folder.*
+    ```bash
+    chmod -R 777 prom_metrics
+    ```
+
+3.  **Build and Start**
+    ```bash
+    docker-compose up -d --build
+    ```
+
+4.  **Access the Dashboard**
+    * Grafana: http://localhost:3000 (Login: admin/admin)
+    * *Note: If running on EC2/Cloud, replace 'localhost' with your Public IP.*
 
 # 4. Access Grafana
 # Visit http://localhost:3000 (admin/admin)
