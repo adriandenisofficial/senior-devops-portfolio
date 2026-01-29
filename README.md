@@ -1,7 +1,7 @@
 # Senior DevOps Portfolio
 ### Cloud Engineering | FinOps | SRE
 
-**Author:** [Your Name]
+**Author:** Adrian Anthony Denis
 **Focus:** Solving complex infrastructure challenges with automation, observability, and security.
 
 ---
