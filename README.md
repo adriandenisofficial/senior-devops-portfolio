@@ -2,6 +2,7 @@
 ### Cloud Engineering | FinOps | SRE
 
 **Author:** Adrian Anthony Denis
+
 **Focus:** Solving complex infrastructure challenges with automation, observability, and security.
 
 ---
