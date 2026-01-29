@@ -1,0 +1,52 @@
+# Senior DevOps Portfolio
+### Cloud Engineering | FinOps | SRE
+
+**Author:** [Your Name]
+**Focus:** Solving complex infrastructure challenges with automation, observability, and security.
+
+---
+
+## 📂 Repository Structure
+This monorepo documents my journey building production-grade DevOps systems.
+
+- **[Project 1: FinOps Observability Pipeline](./project-1-finops)** - *Bridging the gap between Engineering, Finance, and Business metrics.*
+- **Project 2: Zero-Downtime Migration** - *(Coming Soon)* - *High-Availability PostgreSQL cluster with HAProxy.*
+
+---
+
+## 🚀 Project 1: FinOps Observability Pipeline
+### The Challenge
+In modern cloud environments, engineering teams often lack visibility into the financial impact of their infrastructure. "Cost" is usually a bill at the end of the month, not a metric in the dashboard.
+
+### The Solution
+I built a full-stack observability pipeline that correlates **System Health** (Latency), **Business Growth** (Revenue), and **Cloud Costs** (AWS Spend) in a single pane of glass. This allows teams to make data-driven decisions about scaling and pricing.
+
+### 🛠 Tech Stack
+- **Infrastructure:** Docker & Docker Compose
+- **Application:** Python (Flask) with custom Prometheus instrumentation
+- **Observability:** Prometheus, Grafana, Node Exporter
+- **Cloud Integration:** AWS Boto3 SDK (Cost Explorer API)
+- **Security:** IAM Roles & Least Privilege (No hardcoded keys)
+
+### 🌟 Key Technical Implementations
+1.  **Custom Prometheus Exporter:** Wrote a Python script to query the AWS Cost Explorer API and expose metrics via a textfile collector.
+2.  **The Sidecar Pattern:** Utilized `node-exporter` as a sidecar to ingest the custom cost metrics without modifying the core Prometheus image.
+3.  **Business Logic Monitoring:** Instrumented the Flask app to track "Revenue Per Second" alongside standard HTTP latency.
+
+### 📸 Architecture & Evidence
+*(Screenshots of the Grafana Dashboard showing Revenue, Latency, and Cost side-by-side)*
+> **[Link to Dashboard Screenshot](./docs/final-dashboard-evidence.png)**
+
+### 💻 How to Run This Project
+```bash
+# 1. Clone the repo
+git clone [https://github.com/adriandenisofficial/senior-devops-portfolio.git](https://github.com/adriandenisofficial/senior-devops-portfolio.git)
+
+# 2. Navigate to Project 1
+cd senior-devops-portfolio/project-1-finops
+
+# 3. Build and Start the Stack
+docker-compose up -d --build
+
+# 4. Access Grafana
+# Visit http://localhost:3000 (admin/admin)
