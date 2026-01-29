@@ -1,0 +1,52 @@
+version: '3'
+services:
+  #application
+  app:
+    build: ./src
+    ports:
+      - "5000:5000"
+    container_name: finops-app
+  #the collector(prometheus)
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./prom_metrics:/etc/prometheus/textfile_collector
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "9090:9090"
+    container_name: finops-prom
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--collector.textfile.directory=/etc/prometheus/textfile_collector'1~command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--collector.textfile.directory=/etc/prometheus/textfile_collector'1~command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--collector.textfile.directory=/etc/prometheus/textfile_collector'command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--collector.textfile.directory=/etc/prometheus/textfile_collector'command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--collector.textfile.directory=/etc/prometheus/textfile_collector'1~command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--collector.textfile.directory=/etc/prometheus/textfile_collector'1~command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--collector.textfile.directory=/etc/prometheus/textfile_collector'1~command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--collector.textfile.directory=/etc/prometheus/textfile_collector'
+  #the dashboard(grafana)
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    container_name: finops-graf
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD = admin

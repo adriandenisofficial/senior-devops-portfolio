@@ -1,0 +1,4 @@
+
+# HELP aws_monthly_spend_total Total AWS spend for the current month
+# TYPE aws_monthly_spend_total gauge
+aws_monthly_spend_total -5.16e-08
