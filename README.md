@@ -65,6 +65,3 @@ I built a full-stack observability pipeline that correlates **System Health** (L
 4.  **Access the Dashboard**
     * Grafana: http://localhost:3000 (Login: admin/admin)
     * *Note: If running on EC2/Cloud, replace 'localhost' with your Public IP.*
-
-# 4. Access Grafana
-# Visit http://localhost:3000 (admin/admin)
