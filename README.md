@@ -35,6 +35,15 @@ I built a full-stack observability pipeline that correlates **System Health** (L
 3.  **Business Logic Monitoring:** Instrumented the Flask app to track "Revenue Per Second" alongside standard HTTP latency.
 
 ### 📸 Architecture & Evidence
+```mermaid
+graph TD;
+    A[AWS Cost Explorer API] -->|Boto3 Script| B(Text File);
+    B -->|Mount| C[Node Exporter];
+    C -->|Scrape HTTP| D[Prometheus];
+    E[Flask App] -->|Metrics HTTP| D;
+    D -->|Query| F[Grafana Dashboard];
+```
+
 *(Screenshots of the Grafana Dashboard showing Revenue, Latency, and Cost side-by-side)*
 > **[Link to Dashboard Screenshot](./docs/final-dashboard-evidence.png)**
 
