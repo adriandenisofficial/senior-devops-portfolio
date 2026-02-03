@@ -1,0 +1,78 @@
+version: '3.8'
+secrets:
+  postgres_password:
+    external: true
+  replication_password:
+    external: true
+  postgres_user:
+    external: true
+networks:
+  db-net:
+    driver: overlay
+services:
+  pg-primary:
+    image: bitnami/postgresql@sha256:8c7f26a8ba4257fcbf4445bd50e156cbc7d8114942fb3d6523320c7732781b54
+    environment:
+      - POSTGRESQL_USERNAME_FILE=/run/secrets/postgres_user
+      - POSTGRESQL_PASSWORD_FILE=/run/secrets/postgres_password
+      - POSTGRESQL_REPLICATION_MODE=master
+      - POSTGRESQL_REPLICATION_USER=repl_user
+      - POSTGRESQL_REPLICATION_PASSWORD_FILE=/run/secrets/replication_password
+      - POSTGRESQL_PGAUDIT_LOG=WRITE
+      - ALLOW_EMPTY_PASSWORD=no
+    secrets:
+      - postgres_password
+      - replication_password
+      - postgres_user
+    volumes:
+      - pg_primary_data:/bitnami/postgresql
+    networks:
+      - db-net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+      placement:
+        constraints: [node.role == manager]
+  pg-replica:
+    image: bitnami/postgresql@sha256:8c7f26a8ba4257fcbf4445bd50e156cbc7d8114942fb3d6523320c7732781b54
+    environment:
+      - POSTGRESQL_MASTER_HOST=pg-primary
+      - POSTGRESQL_USERNAME_FILE=/run/secrets/postgres_user
+      - POSTGRESQL_PASSWORD_FILE=/run/secrets/postgres_password
+      - POSTGRESQL_REPLICATION_MODE=slave
+      - POSTGRESQL_REPLICATION_USER=repl_user
+      - POSTGRESQL_REPLICATION_PASSWORD_FILE=/run/secrets/replication_password
+      - ALLOW_EMPTY_PASSWORD=no
+    secrets:
+      - postgres_password
+      - replication_password
+      - postgres_user
+    volumes:
+      - pg_replica_data:/bitnami/postgresql
+    networks:
+      - db-net
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+  haproxy:
+    image: haproxy:2.8
+    volumes:
+      - /home/ubuntu/senior-portfolio/project-2-ha-cluster/config/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
+    ports:
+      - "5432:5432"
+      - "8080:8080"
+    networks:
+      - db-net
+    deploy:
+      mode: global
+      update_config:
+        parallelism: 1
+        delay: 10s
+
+volumes:
+  pg_primary_data: {}
+  pg_replica_data: {}
