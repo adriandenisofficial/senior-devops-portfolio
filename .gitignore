@@ -5,3 +5,6 @@
 **/.env
 **/nohup.out
 **/prom_metrics/
+kubectl
+minikube-linux-amd64
+*.exe
